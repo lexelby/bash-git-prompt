@@ -98,7 +98,7 @@ function setGitPrompt() {
     return
   fi
 
-  checkUpstream
+  #checkUpstream
   updatePrompt
 }
 
@@ -155,9 +155,9 @@ function updatePrompt() {
   if [[ -n "${GitStatus}" ]]; then
     local STATUS=" ${GIT_PROMPT_PREFIX}${GIT_PROMPT_BRANCH}${GIT_BRANCH}${ResetColor}"
 
-    if [[ -n "${GIT_REMOTE}" ]]; then
-      STATUS="${STATUS}${GIT_PROMPT_REMOTE}${GIT_REMOTE}${ResetColor}"
-    fi
+    #if [[ -n "${GIT_REMOTE}" ]]; then
+    #  STATUS="${STATUS}${GIT_PROMPT_REMOTE}${GIT_REMOTE}${ResetColor}"
+    #fi
 
     STATUS="${STATUS}${GIT_PROMPT_SEPARATOR}"
     if [ "${GIT_STAGED}" -ne "0" ]; then
