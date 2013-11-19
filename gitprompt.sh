@@ -30,6 +30,7 @@ function git_prompt_config()
   # Bold
   local BoldGreen="\[\033[1;32m\]"    # Green
   local BoldBlue="\[\033[1;34m\]"     # Blue
+  local BoldRed="\[\033[1;31m\]"     # Blue
 
   # High Intensty
   local IntenseBlack="\[\033[0;90m\]" # Grey
@@ -48,11 +49,11 @@ function git_prompt_config()
   GIT_PROMPT_SUFFIX="]"
   GIT_PROMPT_SEPARATOR="|"
   GIT_PROMPT_BRANCH="${Magenta}"
-  GIT_PROMPT_STAGED="${Red}● "
-  GIT_PROMPT_CONFLICTS="${Red}✖ "
-  GIT_PROMPT_CHANGED="${Blue}✚ "
+  GIT_PROMPT_CHANGED="${BoldRed}●"
+  GIT_PROMPT_CONFLICTS="${Red}✖"
+  GIT_PROMPT_STAGED="${BoldBlue}▬"
   GIT_PROMPT_REMOTE=" "
-  GIT_PROMPT_UNTRACKED="…"
+  GIT_PROMPT_UNTRACKED="${Yellow}✚"
   GIT_PROMPT_CLEAN="${BoldGreen}✔"
 
   # Various variables you might want for your PS1 prompt instead
@@ -209,7 +210,9 @@ fi
 if [ -z "$PROMPT_COMMAND" ]; then
   PROMPT_COMMAND=setGitPrompt
 else
-  PROMPT_COMMAND=${PROMPT_COMMAND%% }; # remove trailing spaces
-  PROMPT_COMMAND=${PROMPT_COMMAND%\;}; # remove trailing semi-colon
-  PROMPT_COMMAND="$PROMPT_COMMAND;setGitPrompt"
+  if [[ "${PROMPT_COMMAND/setGitPrompt//}" = "${PROMPT_COMMAND}" ]]; then
+    PROMPT_COMMAND=${PROMPT_COMMAND%% }; # remove trailing spaces
+    PROMPT_COMMAND=${PROMPT_COMMAND%\;}; # remove trailing semi-colon
+    PROMPT_COMMAND="$PROMPT_COMMAND;setGitPrompt"
+  fi
 fi
