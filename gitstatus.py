@@ -64,7 +64,7 @@ staged = str(nb_staged)
 conflicts = str(nb_U)
 changed = str(nb_changed)
 status_lines = Popen(['git','status','-s','-uall'],stdout=PIPE).communicate()[0].splitlines()
-untracked_lines = [a for a in status_lines if a.startswith("??")]
+untracked_lines = [a for a in status_lines if a.startswith(b"??")]
 nb_untracked = len(untracked_lines)
 untracked = str(nb_untracked)
 if not nb_changed and not nb_staged and not nb_U and not nb_untracked:
